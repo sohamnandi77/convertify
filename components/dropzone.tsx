@@ -1,13 +1,12 @@
 "use client";
 
-// imports
 import { FiUploadCloud } from "react-icons/fi";
 import { LuFileSymlink } from "react-icons/lu";
 import { MdClose } from "react-icons/md";
 import ReactDropzone from "react-dropzone";
 import bytesToSize from "@/utils/bytes-to-size";
 import fileToIcon from "@/utils/file-to-icon";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import compressFileName from "@/utils/compress-file-name";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -199,13 +198,15 @@ export default function Dropzone() {
       })
     );
   };
-  const checkIsReady = (): void => {
+
+  const checkIsReady = useCallback((): void => {
     let tmp_is_ready = true;
     actions.forEach((action: Action) => {
       if (!action.to) tmp_is_ready = false;
     });
     setIsReady(tmp_is_ready);
-  };
+  }, [actions]);
+
   const deleteAction = (action: Action): void => {
     setActions(actions.filter((elt) => elt !== action));
     setFiles(files.filter((elt) => elt.name !== action.file_name));
@@ -217,7 +218,7 @@ export default function Dropzone() {
       setIsReady(false);
       setIsConverting(false);
     } else checkIsReady();
-  }, [actions]);
+  }, [actions, checkIsReady]);
   useEffect(() => {
     load();
   }, []);
@@ -285,7 +286,7 @@ export default function Dropzone() {
                   }}
                   value={selcted}
                 >
-                  <SelectTrigger className="w-32 outline-none focus:outline-none focus:ring-0 text-center text-muted-foreground bg-background text-md font-medium">
+                  <SelectTrigger className="w-32 outline-hidden focus:outline-hidden focus:ring-0 text-center text-muted-foreground bg-background text-md font-medium">
                     <SelectValue placeholder="..." />
                   </SelectTrigger>
                   <SelectContent className="h-fit">
@@ -433,7 +434,7 @@ export default function Dropzone() {
       {({ getRootProps, getInputProps }) => (
         <div
           {...getRootProps()}
-          className=" bg-background h-72 lg:h-80 xl:h-96 rounded-3xl shadow-sm border-secondary border-2 border-dashed cursor-pointer flex items-center justify-center"
+          className=" bg-background h-72 lg:h-80 xl:h-96 rounded-3xl shadow-2xs border-secondary border-2 border-dashed cursor-pointer flex items-center justify-center"
         >
           <input {...getInputProps()} />
           <div className="space-y-4 text-foreground">
