@@ -1,4 +1,4 @@
-# [Convertify](https://github.com/sohamnandi77/url-checker) &middot; [![Author Soham](https://img.shields.io/badge/Author-Soham-%3C%3E)](https://www.sohamnandi.com)
+# [Convertify](https://github.com/sohamnandi77/convertify) &middot; [![Author Soham](https://img.shields.io/badge/Author-Soham-%3C%3E)](https://www.sohamnandi.com)
 
 Discover **Convertify** – your go-to online solution for seamless, free, and unlimited multimedia conversion. Convert images, videos, and audio files effortlessly in just a few clicks. Say goodbye to limitations and enhance your digital projects with ease.
 
